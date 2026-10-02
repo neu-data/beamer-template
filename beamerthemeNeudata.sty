@@ -1,0 +1,191 @@
+% ---------------------------------------------------------------------------
+% beamerthemeNeudata.sty — Neudata Consulting Ltd Beamer theme
+% Matches the Neudata PowerPoint template: white slides, teal titles with a
+% thin rule, small logo bottom-left, "Neudata | #ClearDataClearImpact" footer
+% and slide numbers bottom-right.
+%
+% Usage:  \usetheme{Neudata}
+% Options: logo=<file>   (default figures/neudata-logo.png)
+%          nofonts       (keep the Beamer default font instead of TeX Gyre Adventor)
+% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeNeudata}[2026/10/02 Neudata Beamer theme]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=neudata, prefix=neudata@}
+\DeclareStringOption[figures/neudata-logo.png]{logo}
+\DeclareBoolOption{nofonts}
+\ProcessKeyvalOptions*
+
+\RequirePackage{tikz}
+\RequirePackage{etoolbox}
+
+% ----- Colours (from the Neudata logo and PowerPoint template) -------------
+\definecolor{NeudataTeal}{HTML}{0D7377}   % titles, rules, footer
+\definecolor{NeudataDeepTeal}{HTML}{055F56}
+\definecolor{NeudataBlue}{HTML}{0070C0}   % notes, copyright heading
+\definecolor{NeudataNavy}{HTML}{04242F}
+\definecolor{NeudataLogoBlue}{HTML}{0B376C}
+\definecolor{NeudataMist}{HTML}{EAF2F5}
+\definecolor{NeudataGrey}{HTML}{8A99A3}
+\definecolor{NeudataInk}{HTML}{1A1A1A}
+
+% ----- Fonts ----------------------------------------------------------------
+% TeX Gyre Adventor is a free geometric sans close to Century Gothic,
+% the font used in the PowerPoint template. Available on Overleaf.
+\ifneudata@nofonts\else
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{tgadventor}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+\usefonttheme{professionalfonts}
+
+\setbeamerfont{frametitle}{size=\LARGE, series=\bfseries}
+\setbeamerfont{title}{size=\Huge, series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{institute}{size=\normalsize}
+\setbeamerfont{date}{size=\small, series=\bfseries}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{block title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{section title}{size=\Huge, series=\bfseries}
+
+% ----- Base colours -----------------------------------------------------------
+\setbeamercolor{normal text}{fg=NeudataInk, bg=white}
+\setbeamercolor{structure}{fg=NeudataTeal}
+\setbeamercolor{alerted text}{fg=NeudataBlue}
+\setbeamercolor{example text}{fg=NeudataDeepTeal}
+\setbeamercolor{frametitle}{fg=NeudataTeal}
+\setbeamercolor{title}{fg=NeudataTeal}
+\setbeamercolor{subtitle}{fg=NeudataNavy}
+\setbeamercolor{author}{fg=NeudataInk}
+\setbeamercolor{institute}{fg=NeudataInk}
+\setbeamercolor{date}{fg=NeudataInk}
+\setbeamercolor{footline}{fg=NeudataTeal}
+\setbeamercolor{block title}{fg=white, bg=NeudataTeal}
+\setbeamercolor{block body}{fg=NeudataInk, bg=NeudataMist}
+\setbeamercolor{block title alerted}{fg=white, bg=NeudataBlue}
+\setbeamercolor{block body alerted}{fg=NeudataInk, bg=NeudataBlue!8}
+\setbeamercolor{block title example}{fg=white, bg=NeudataNavy}
+\setbeamercolor{block body example}{fg=NeudataInk, bg=NeudataNavy!6}
+\setbeamercolor{item}{fg=NeudataTeal}
+\setbeamercolor{subitem}{fg=NeudataBlue}
+\setbeamercolor{caption name}{fg=NeudataTeal}
+\setbeamercolor{bibliography item}{fg=NeudataTeal}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tikz\fill[NeudataTeal] (0,0) circle (0.28em);}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.2ex}{\tikz\fill[NeudataBlue] (0,0) circle (0.2em);}}
+\setbeamertemplate{enumerate item}{\textbf{\color{NeudataTeal}\insertenumlabel.}}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{caption}[numbered]
+\setbeamersize{text margin left=0.45cm, text margin right=0.45cm}
+
+% ----- Frame title: teal, with a thin rule underneath -------------------------
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.45cm}%
+  \begin{beamercolorbox}[wd=\paperwidth, leftskip=0.45cm, rightskip=0.45cm]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle%
+    \ifx\insertframesubtitle\@empty\else
+      \par\vspace{0.1em}{\usebeamerfont{framesubtitle}\normalsize\color{NeudataNavy}\mdseries\insertframesubtitle}%
+    \fi
+  \end{beamercolorbox}%
+  \vspace{-0.15cm}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[NeudataTeal, line width=0.7pt]
+      ([xshift=0.35cm]current page.west |- 0,0) -- ([xshift=-0.35cm]current page.east |- 0,0);
+  \end{tikzpicture}%
+  \vspace{0.3cm}%
+}
+
+% ----- Footline: small logo · tagline · slide number --------------------------
+\newcommand{\neudatafootertext}{Neudata \,|\, \#ClearDataClearImpact}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south west, inner sep=0] at ([xshift=0.25cm, yshift=0.18cm]current page.south west)
+      {\includegraphics[height=0.75cm]{\neudata@logo}};
+    \node[anchor=south, inner sep=0, text=NeudataTeal, font=\usebeamerfont{footline}]
+      at ([yshift=0.3cm]current page.south) {\neudatafootertext};
+    \node[anchor=south east, inner sep=0, text=NeudataGrey, font=\usebeamerfont{footline}]
+      at ([xshift=-0.4cm, yshift=0.3cm]current page.south east) {\insertframenumber};
+  \end{tikzpicture}%
+  \vspace*{0.9cm}%
+}
+
+% ----- Title page: centred title, large logo bottom-left, date bottom-right --
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=center, text width=0.85\paperwidth, align=center]
+      at ([yshift=1.55cm]current page.center)
+      {{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}%
+       \ifx\insertsubtitle\@empty\else\\[0.35em]{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\fi};
+    \node[anchor=north, text width=0.8\paperwidth, align=center]
+      at ([yshift=0.15cm]current page.center)
+      {{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}%
+       \ifx\insertinstitute\@empty\else\\[0.3em]{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute}\fi};
+    \node[anchor=south west, inner sep=0] at ([xshift=0.55cm, yshift=0.45cm]current page.south west)
+      {\includegraphics[height=2.6cm]{\neudata@logo}};
+    \node[anchor=south east, inner sep=0, font=\usebeamerfont{date}]
+      at ([xshift=-1.1cm, yshift=0.95cm]current page.south east) {Date: \insertdate};
+  \end{tikzpicture}%
+}
+
+% Title frame has no footer
+\newcommand{\neudatatitleframe}{%
+  {\setbeamertemplate{footline}{}\begin{frame}[plain]\titlepage\end{frame}}%
+  \addtocounter{framenumber}{-1}%
+}
+
+% ----- Section divider: automatic at each \section ----------------------------
+\setbeamertemplate{section page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=west, inner sep=0] at ([xshift=1.2cm, yshift=0.4cm]current page.west)
+      {\includegraphics[height=2.2cm]{\neudata@logo}};
+    \draw[NeudataTeal, line width=1.2pt]
+      ([xshift=5.6cm, yshift=1.4cm]current page.west) -- ([xshift=5.6cm, yshift=-0.6cm]current page.west);
+    \node[anchor=west, text width=0.55\paperwidth, align=left] at ([xshift=6.1cm, yshift=0.4cm]current page.west)
+      {{\usebeamerfont{section title}\color{NeudataTeal}\insertsectionhead}%
+       \\[0.4em]{\normalsize\color{NeudataGrey}Section \insertsectionnumber}};
+  \end{tikzpicture}%
+}
+\AtBeginSection[]{\begin{frame}[plain,noframenumbering]\sectionpage\end{frame}}
+
+% ----- Helpers ----------------------------------------------------------------
+% Today's date as DD-MM-YYYY, as in the PowerPoint template:  \date{\neudatatoday}
+\newcommand{\neudatatoday}{\two@digits{\day}-\two@digits{\month}-\the\year}
+% Teal sub-heading inside a slide (like "Study Design" in the PowerPoint)
+\newcommand{\neudataheading}[1]{{\par\medskip\large\bfseries\color{NeudataTeal}#1\par\smallskip}}
+% Blue note line (like "Notes" in the PowerPoint)
+\newcommand{\neudatanote}[1]{{\large\color{NeudataBlue}#1}}
+% Big number callout:  \neudatastat{16,293}{live births}
+\newcommand{\neudatastat}[2]{%
+  \begin{minipage}[t]{\linewidth}\centering
+    {\fontsize{30}{32}\selectfont\bfseries\color{NeudataTeal}#1}\\[0.2em]
+    {\small\color{NeudataGrey}#2}
+  \end{minipage}}
+
+% ----- Closing copyright slide --------------------------------------------------
+\newcommand{\neudatacopyrightyear}{\the\year}
+\newcommand{\neudatacopyrightframe}{%
+  \begin{frame}[noframenumbering]
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north, inner sep=0] at ([xshift=1.5cm, yshift=-0.35cm]current page.north)
+        {\includegraphics[height=2.5cm]{\neudata@logo}};
+      \node[anchor=north west, inner sep=0, text width=0.76\paperwidth, align=left]
+        at ([xshift=2.1cm, yshift=-3.05cm]current page.north west) {%
+      {\large\bfseries\color{NeudataBlue}Copyright \textcopyright\ Neudata, \neudatacopyrightyear}\par\medskip
+      {\ttfamily\fontsize{6.6}{8}\selectfont
+      All property rights and copyright are reserved.\par\smallskip
+      This presentation contains proprietary data, information, and materials developed by
+      Neudata for dedicated use only and may not be communicated, copied, reproduced,
+      distributed, published, or cited, in whole or in part, without the prior written consent
+      of Neudata. Where explicit written permission has been granted, appropriate attribution
+      must be included, followed by ``by courtesy of Neudata''.\par\smallskip
+      Any unauthorized use or infringement of these materials may give rise to legal action and
+      claims for damages, without prejudice to any other rights of Neudata, including rights
+      relating to patents, trademarks, or other forms of intellectual property protection.\par}};
+    \end{tikzpicture}
+  \end{frame}}
+
+\mode<all>

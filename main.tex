@@ -1,0 +1,94 @@
+% ---------------------------------------------------------------------------
+% Neudata Consulting Ltd — Beamer presentation template
+% Compile with pdfLaTeX (Overleaf default) or XeLaTeX.
+% ---------------------------------------------------------------------------
+\documentclass[aspectratio=169, 11pt]{beamer}
+\usetheme{Neudata}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\title{Presentation Title}
+\subtitle{Optional subtitle}
+\author{Presenter Name, Role}
+\institute{Neudata Consulting Ltd}
+\date{\neudatatoday}   % or e.g. \date{29-04-2026}
+
+\begin{document}
+
+% ----- Title slide -----------------------------------------------------------
+\neudatatitleframe
+
+% ----- Content slides ---------------------------------------------------------
+\section{Background}
+
+\begin{frame}{Title}
+  \neudatanote{Notes}
+\end{frame}
+
+\begin{frame}{Study Overview}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \neudataheading{Study Design}
+      Description of the design \\
+      Setting and population \\
+      Data collection period
+
+      \neudataheading{Primary Outcome}
+      Definition of the primary outcome
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \neudataheading{Intervention}
+      \begin{itemize}
+        \item Component one
+        \item Component two
+        \item Component three
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}{Key numbers}
+  \vspace{0.6cm}
+  \begin{columns}[T]
+    \column{0.31\textwidth}\neudatastat{12,345}{participants}
+    \column{0.31\textwidth}\neudatastat{87.4\%}{coverage}
+    \column{0.31\textwidth}\neudatastat{5}{study sites}
+  \end{columns}
+  \vspace{0.9cm}
+  \begin{block}{Key finding}
+    State the main result plainly, with its size and uncertainty.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Table}
+  \centering
+  \begin{tabular}{lrrr}
+    \toprule
+    Group & $n$ & Estimate & 95\% CI \\
+    \midrule
+    Overall & 1,200 & 84.2 & 81.9--86.3 \\
+    Urban   &   640 & 88.1 & 85.3--90.4 \\
+    Rural   &   560 & 79.8 & 76.2--83.0 \\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{Blocks}
+  \begin{block}{Standard block}
+    Neutral information.
+  \end{block}
+  \begin{alertblock}{Alert block}
+    Something that needs attention.
+  \end{alertblock}
+  \begin{exampleblock}{Example block}
+    A worked example.
+  \end{exampleblock}
+\end{frame}
+
+% ----- Closing slide -----------------------------------------------------------
+\neudatacopyrightframe
+
+\end{document}
