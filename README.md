@@ -6,7 +6,7 @@
 
 **LaTeX presentations in the Neudata house style — matching the Neudata PowerPoint template.**
 
-[![Open in Overleaf](https://img.shields.io/badge/Open%20in-Overleaf-055F56?style=flat&logo=overleaf&logoColor=white)](https://www.overleaf.com/docs?snip_uri=https://github.com/neu-data/beamer-template/archive/refs/heads/main.zip)
+[![Open in Overleaf](https://img.shields.io/badge/Open%20in-Overleaf-055F56?style=flat&logo=overleaf&logoColor=white)](https://www.overleaf.com/docs?snip_uri=https://raw.githubusercontent.com/neu-data/beamer-template/main/overleaf.zip)
 ![LaTeX](https://img.shields.io/badge/LaTeX-Beamer-0B376C?style=flat&logo=latex&logoColor=white)
 ![Neudata](https://img.shields.io/badge/Neudata-brand-04242F?style=flat)
 
@@ -30,7 +30,7 @@ See the compiled example: [`examples/example.pdf`](examples/example.pdf).
 
 ## Use it on Overleaf
 
-Click **Open in Overleaf** above, or download the repository as a ZIP and use **New Project → Upload Project**. Compile with the default **pdfLaTeX**.
+Click **Open in Overleaf** above, or download [`overleaf.zip`](overleaf.zip) and use **New Project → Upload Project**. Compile with the default **pdfLaTeX**.
 
 ## Use it locally
 
